@@ -9,7 +9,7 @@ let timeLeft = 1500; // 25 minutes in seconds
 function updateTimer() {
     let minutes = Math.floor(timeLeft / 60);
     let seconds = timeLeft % 60;
-    let formattedTime = minutes + ":" + seconds
+    let formattedTime = `${minutes.toString().padStart(2, "0") + ":" + seconds.toString().padStart(2, "0")}`;
 
     timerEl.innerHTML = formattedTime;
 }
@@ -18,15 +18,22 @@ function startTimer() {
     interval = setInterval(() => {
         timeLeft--;
         updateTimer();
+        if (timeLeft === 0) {
+            clearInterval(interval);
+            alert('Time is up!');
+            timeLeft = 1500;
+        }
     }, 1000)
 };
 
 function stopTimer() {
-    console.log('Timer stopped');
+    clearInterval(interval);
 };
 
 function resetTimer() {
-    console.log('Timer reset');
+    clearInterval(interval);
+    timeLeft = 1500; // Reset to 25 minutes
+    updateTimer();
 };
 
 
