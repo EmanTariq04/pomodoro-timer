@@ -4,10 +4,20 @@ const resetEl = document.getElementById('reset');
 const timerEl = document.getElementById('timer');
 
 let interval;
+let timeLeft = 1500; // 25 minutes in seconds
+
+function updateTimer() {
+    let minutes = Math.floor(timeLeft / 60);
+    let seconds = timeLeft % 60;
+    let formattedTime = minutes + ":" + seconds
+
+    timerEl.innerHTML = formattedTime;
+}
 
 function startTimer() {
     interval = setInterval(() => {
-
+        timeLeft--;
+        updateTimer();
     }, 1000)
 };
 
